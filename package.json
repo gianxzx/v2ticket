@@ -1,1 +1,25 @@
-
+{
+  "name": "discord-ticket-bot",
+  "version": "1.0.0",
+  "description": "Fully customizable Discord Ticket Bot System with v2 embeds, buttons, modals, PostgreSQL persistence.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "pg": "^8.12.0",
+    "express": "^4.18.2",
+    "discord-html-transcripts": "^4.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
