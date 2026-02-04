@@ -34,3 +34,18 @@ module.exports = {
   createTicket,
   getTicketByChannel
 };
+
+async function claimTicket({ channel_id, chef_id }) {
+  const res = await pool.query(
+    `UPDATE tickets
+     SET chef_id = $1,
+         status = 'claimed',
+         claimed_at = NOW()
+     WHERE channel_id = $2
+       AND status = 'open'
+     RETURNING *`,
+    [chef_id, channel_id]
+  );
+
+  return res.rows[0]; // undefined if already claimed
+}
