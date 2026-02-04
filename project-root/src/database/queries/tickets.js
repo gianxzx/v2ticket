@@ -49,3 +49,17 @@ async function claimTicket({ channel_id, chef_id }) {
 
   return res.rows[0]; // undefined if already claimed
 }
+
+async function closeTicket(channel_id) {
+  const res = await pool.query(
+    `UPDATE tickets
+     SET status = 'closed',
+         closed_at = NOW()
+     WHERE channel_id = $1
+       AND status = 'claimed'
+     RETURNING *`,
+    [channel_id]
+  );
+
+  return res.rows[0];
+}
