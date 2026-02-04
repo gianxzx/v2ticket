@@ -5,21 +5,25 @@ const {
   ButtonStyle
 } = require("discord.js");
 
-module.exports = function ticketPanelEmbed() {
+module.exports = function ticketEmbed({ customerId, order }) {
   const embed = new EmbedBuilder()
-    .setTitle("🍽️ Order Ticket")
+    .setTitle("📦 New Order Ticket")
     .setDescription(
-      "Click the button below to place your order.\n" +
-      "A private ticket will be created for you."
+      `**Customer:** <@${customerId}>\n` +
+      `**Order:** ${order}`
     )
     .setColor(0x3498db)
-    .setFooter({ text: "Ticket System" });
+    .setFooter({ text: "Ticket Status: OPEN" });
 
   const row = new ActionRowBuilder().addComponents(
     new ButtonBuilder()
-      .setCustomId("open_ticket")
-      .setLabel("Open Ticket")
-      .setStyle(ButtonStyle.Primary)
+      .setCustomId("claim_ticket")
+      .setLabel("Claim")
+      .setStyle(ButtonStyle.Success),
+    new ButtonBuilder()
+      .setCustomId("close_ticket")
+      .setLabel("Close")
+      .setStyle(ButtonStyle.Danger)
   );
 
   return {
